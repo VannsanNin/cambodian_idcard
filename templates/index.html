@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="km">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ប្រព័ន្ធគ្រប់គ្រងអត្តសញ្ញាណបណ្ណសញ្ជាតិខ្មែរ | Cambodian National ID System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -27,7 +31,7 @@
                         <i class="fas fa-moon" id="theme-icon"></i>
                     </button>
                     <button class="btn btn-primary" onclick="showAddModal()">
-                        <i class="fas fa-plus"></i> ចុះឈ្មោះថ្មី
+                        <i class="fas fa-plus"></i> បង្កើតថ្មី
                     </button>
                 </div>
             </div>
@@ -74,7 +78,9 @@
             <section class="search-section">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="search-input" placeholder="ស្វែងរកតាមឈ្មោះ, លេខអត្តសញ្ញាណបណ្ណ, ទីកន្លែងកំណើត...">
+                    <input type="text" id="search-input"
+                        maxlength="100"
+                        placeholder="ស្វែងរកតាមឈ្មោះ, លេខអត្តសញ្ញាណបណ្ណ, ទីកន្លែងកំណើត...">
                     <button class="btn btn-search" onclick="searchIDCards()">
                         <i class="fas fa-search"></i> ស្វែងរក
                     </button>
@@ -127,139 +133,319 @@
 
     <!-- Add/Edit Modal -->
     <div class="modal" id="card-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title"><i class="fas fa-id-card"></i> ចុះឈ្មោះថ្មី</h2>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
+        <div class="modal-content modal-form-content">
+            <div class="modal-header modal-form-header">
+                <div class="modal-title-block">
+                    <span class="modal-kicker">ប្រព័ន្ធគ្រប់គ្រងអត្តសញ្ញាណបណ្ណ</span>
+                    <h2 id="modal-title"><i class="fas fa-id-card"></i> បង្កើតអត្តសញ្ញាណបណ្ណថ្មី</h2>
+                    <p id="modal-subtitle">បំពេញព័ត៌មានសំខាន់ៗខាងក្រោម ដើម្បីរក្សាទុកកំណត់ត្រាថ្មី។</p>
+                </div>
+                <button type="button" class="close-btn" aria-label="បិទ" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             <div class="modal-body">
-                <form id="card-form">
+                <form id="card-form" class="card-form-layout">
                     <input type="hidden" id="card-id">
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="id_number">
-                                <i class="fas fa-hashtag"></i> លេខអត្តសញ្ញាណបណ្ណ *
-                            </label>
-                            <input type="text" id="id_number" required placeholder="ឧ. 012345678">
+
+                    <div class="form-intro">
+                        <div>
+                            <strong>ព័ត៌មានចាំបាច់សម្រាប់ការរក្សាទុក</strong>
+                            <p>វាលដែលមានសញ្ញា * ត្រូវបំពេញឲ្យបានត្រឹមត្រូវមុនពេលរក្សាទុកព័ត៌មាន។</p>
                         </div>
-                        <div class="form-group">
-                            <label for="photo_url">
-                                <i class="fas fa-image"></i> URL រូបភាព
-                            </label>
-                            <input type="url" id="photo_url" placeholder="https://example.com/photo.jpg">
+                        <div class="required-note">
+                            <span>*</span> ចាំបាច់
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="khmer_name">
-                                <i class="fas fa-user"></i> ឈ្មោះពេញ (ខ្មែរ) *
-                            </label>
-                            <input type="text" id="khmer_name" required placeholder="ឧ. សួន សុខា">
+                    <section class="form-section">
+                        <div class="form-section-header">
+                            <div class="form-section-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div>
+                                <h3>ព័ត៌មានមូលដ្ឋាន</h3>
+                                <p>អត្តសញ្ញាណមូលដ្ឋាន ឈ្មោះ និងរូបថតសម្រាប់កំណត់ត្រានេះ</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="latin_name">
-                                <i class="fas fa-user"></i> ឈ្មោះពេញ (ឡាតាំង) *
-                            </label>
-                            <input type="text" id="latin_name" required placeholder="ឧ. SUON SOKHA">
+
+                        <div class="form-hero-grid">
+                            <div class="photo-preview-card">
+                                <div class="photo-preview-frame" id="photo-preview-frame">
+                                    <div class="photo-preview-empty" id="photo-preview-empty">
+                                        <i class="fas fa-image"></i>
+                                        <span>មិនទាន់មានរូបថត</span>
+                                    </div>
+                                    <img id="photo-preview-image" alt="រូបថតសម្គាល់" hidden>
+                                </div>
+                                <p>អាចបញ្ចូលតំណរូបភាព ឬជ្រើសរើសរូបពីកុំព្យូទ័រ ដើម្បីបង្ហាញលើកាត និងទំព័រលម្អិត។</p>
+                            </div>
+
+                            <div class="form-section-fields">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="id_number">
+                                            <i class="fas fa-hashtag"></i> លេខអត្តសញ្ញាណបណ្ណ *
+                                        </label>
+                                        <div class="input-with-action">
+                                            <input type="text" id="id_number" placeholder="ប្រព័ន្ធនឹងបង្កើតលេខស្វ័យប្រវត្តិ"
+                                                maxlength="20" inputmode="numeric" pattern="[0-9]{5,20}"
+                                                autocomplete="off">
+                                            <button type="button" class="btn btn-secondary btn-inline"
+                                                id="generate-id-btn" onclick="generateIdNumber(true)">
+                                                <i class="fas fa-wand-magic-sparkles"></i> បង្កើតលេខ
+                                            </button>
+                                        </div>
+                                        <small class="form-hint">អាចទុកទទេ ឬចុចប៊ូតុង ដើម្បីឲ្យប្រព័ន្ធបង្កើតលេខស្វ័យប្រវត្តិ។</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="photo_url">
+                                            <i class="fas fa-link"></i> តំណរូបថត ឬរូបពីកុំព្យូទ័រ *
+                                        </label>
+                                        <input type="text" id="photo_url" placeholder="https://example.com/photo.jpg"
+                                            maxlength="500" inputmode="url" autocomplete="off" required>
+                                        <div class="photo-source-actions">
+                                            <input type="file" id="photo_file" accept="image/*" hidden>
+                                            <button type="button" class="btn btn-secondary btn-inline"
+                                                id="choose-photo-btn">
+                                                <i class="fas fa-folder-open"></i> ជ្រើសរើសរូប
+                                            </button>
+                                            <button type="button" class="btn btn-secondary btn-inline"
+                                                id="clear-photo-btn">
+                                                <i class="fas fa-trash-alt"></i> លុបរូប
+                                            </button>
+                                        </div>
+                                        <small class="form-hint" id="photo-source-status">
+                                            សូមបញ្ចូលតំណរូបភាពសាធារណៈ ឬជ្រើសរើសរូបពីកុំព្យូទ័រ។ ឯកសារដែលគាំទ្រ៖ JPG, PNG, GIF, WEBP ទំហំអតិបរមា 5MB។
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="khmer_name">
+                                            <i class="fas fa-user"></i> ឈ្មោះពេញជាភាសាខ្មែរ *
+                                        </label>
+                                        <input type="text" id="khmer_name" required placeholder="ឧ. សួន សុខា"
+                                            lang="km" inputmode="text" data-khmer-only="true"
+                                            maxlength="100">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="latin_name">
+                                            <i class="fas fa-signature"></i> ឈ្មោះពេញជាអក្សរឡាតាំង *
+                                        </label>
+                                        <input type="text" id="latin_name" required placeholder="ឧ. SUON SOKHA"
+                                            lang="en" inputmode="text" data-latin-only="true"
+                                            maxlength="100">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="date_of_birth">
+                                            <i class="fas fa-calendar-alt"></i> ថ្ងៃខែឆ្នាំកំណើត *
+                                        </label>
+                                        <input type="date" id="date_of_birth" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gender">
+                                            <i class="fas fa-venus-mars"></i> ភេទ *
+                                        </label>
+                                        <select id="gender" required>
+                                            <option value="">ជ្រើសរើសភេទ</option>
+                                            <option value="ប្រុស">ប្រុស</option>
+                                            <option value="ស្រី">ស្រី</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nationality">
+                                        <i class="fas fa-flag"></i> សញ្ជាតិ
+                                    </label>
+                                    <input type="text" id="nationality" value="ខ្មែរ" readonly>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="date_of_birth">
-                                <i class="fas fa-calendar-alt"></i> ថ្ងៃខែឆ្នាំកំណើត *
-                            </label>
-                            <input type="date" id="date_of_birth" required>
+                    <section class="form-section">
+                        <div class="form-section-header">
+                            <div class="form-section-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div>
+                                <h3>ទីកន្លែងកំណើត</h3>
+                                <p>ជ្រើសរើសទីតាំងកំណើតតាមលំដាប់ ខេត្ត ស្រុក ឃុំ និងភូមិ</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="gender">
-                                <i class="fas fa-venus-mars"></i> ភេទ *
-                            </label>
-                            <select id="gender" required>
-                                <option value="">ជ្រើសរើសភេទ</option>
-                                <option value="ប្រុស">ប្រុស</option>
-                                <option value="ស្រី">ស្រី</option>
-                            </select>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pob_province">
+                                    <i class="fas fa-map"></i> ខេត្ត/រាជធានីកំណើត *
+                                </label>
+                                <select id="pob_province" required>
+                                    <option value="">កំពុងទាញយកទិន្នន័យ...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pob_district">
+                                    <i class="fas fa-map-marker-alt"></i> ស្រុក/ខណ្ឌកំណើត *
+                                </label>
+                                <select id="pob_district" required disabled>
+                                    <option value="">ជ្រើសរើសស្រុក/ខណ្ឌ</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="nationality">
-                            <i class="fas fa-flag"></i> សញ្ជាតិ
-                        </label>
-                        <input type="text" id="nationality" value="ខ្មែរ" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="place_of_birth">
-                            <i class="fas fa-map-marker-alt"></i> ទីកន្លែងកំណើត (ភូមិ ឃុំ ស្រុក) *
-                        </label>
-                        <textarea id="place_of_birth" rows="2" required placeholder="ឧ. ភូមិ១, ឃុំ២, ស្រុក៣"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pob_province">
-                            <i class="fas fa-city"></i> ខេត្ត/រាជធានី (ទីកន្លែងកំណើត) *
-                        </label>
-                        <select id="pob_province" required>
-                            <option value="">កំពុងទាញយកទិន្នន័យ...</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="current_address">
-                            <i class="fas fa-home"></i> អាសយដ្ឋានបច្ចុប្បន្ន (ភូមិ ឃុំ ស្រុក) *
-                        </label>
-                        <textarea id="current_address" rows="2" required placeholder="ឧ. ភូមិ១, ឃុំ២, ស្រុក៣"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="current_province">
-                            <i class="fas fa-city"></i> ខេត្ត/រាជធានី (បច្ចុប្បន្ន) *
-                        </label>
-                        <select id="current_province" required>
-                            <option value="">កំពុងទាញយកទិន្នន័យ...</option>
-                        </select>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="father_name">
-                                <i class="fas fa-male"></i> ឈ្មោះឪពុក *
-                            </label>
-                            <input type="text" id="father_name" required placeholder="ឈ្មោះឪពុក">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pob_commune">
+                                    <i class="fas fa-map-pin"></i> ឃុំ/សង្កាត់កំណើត *
+                                </label>
+                                <select id="pob_commune" required disabled>
+                                    <option value="">ជ្រើសរើសឃុំ/សង្កាត់</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pob_village">
+                                    <i class="fas fa-home"></i> ភូមិកំណើត *
+                                </label>
+                                <select id="pob_village" required disabled>
+                                    <option value="">ជ្រើសរើសភូមិ</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="mother_name">
-                                <i class="fas fa-female"></i> ឈ្មោះម្តាយ *
-                            </label>
-                            <input type="text" id="mother_name" required placeholder="ឈ្មោះម្តាយ">
-                        </div>
-                    </div>
+                    </section>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="issue_date">
-                                <i class="fas fa-calendar-check"></i> ថ្ងៃចុះបញ្ជី *
-                            </label>
-                            <input type="date" id="issue_date" required>
+                    <section class="form-section">
+                        <div class="form-section-header">
+                            <div class="form-section-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div>
+                                <h3>អាសយដ្ឋានបច្ចុប្បន្ន</h3>
+                                <p>បញ្ជាក់ទីតាំងរស់នៅបច្ចុប្បន្នឲ្យបានច្បាស់លាស់ និងងាយស្រួលស្វែងរក</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="expiry_date">
-                                <i class="fas fa-calendar-times"></i> ថ្ងៃផុតកំណត់ *
-                            </label>
-                            <input type="date" id="expiry_date" required>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="current_province">
+                                    <i class="fas fa-city"></i> ខេត្ត/រាជធានីបច្ចុប្បន្ន *
+                                </label>
+                                <select id="current_province" required>
+                                    <option value="">កំពុងទាញយកទិន្នន័យ...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="current_district">
+                                    <i class="fas fa-map-marker-alt"></i> ស្រុក/ខណ្ឌបច្ចុប្បន្ន *
+                                </label>
+                                <select id="current_district" required disabled>
+                                    <option value="">ជ្រើសរើសស្រុក/ខណ្ឌ</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="current_commune">
+                                    <i class="fas fa-map-pin"></i> ឃុំ/សង្កាត់បច្ចុប្បន្ន *
+                                </label>
+                                <select id="current_commune" required disabled>
+                                    <option value="">ជ្រើសរើសឃុំ/សង្កាត់</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="current_village">
+                                    <i class="fas fa-home"></i> ភូមិបច្ចុប្បន្ន *
+                                </label>
+                                <select id="current_village" required disabled>
+                                    <option value="">ជ្រើសរើសភូមិ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="current_address_detail">
+                                <i class="fas fa-location-dot"></i> អាសយដ្ឋានលម្អិត (ផ្ទះលេខ/ផ្លូវ)
+                            </label>
+                            <textarea id="current_address_detail" rows="2"
+                                maxlength="150"
+                                placeholder="ឧ. ផ្ទះលេខ ១២៣, ផ្លូវលេខ ៤៥៦"></textarea>
+                            <small class="form-hint">បញ្ចូលព័ត៌មានបន្ថែមដូចជា លេខផ្ទះ ឬលេខផ្លូវ ប្រសិនបើមាន។</small>
+                        </div>
+
+
+                    </section>
+
+                    <section class="form-section">
+                        <div class="form-section-header">
+                            <div class="form-section-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <h3>ព័ត៌មានគ្រួសារ</h3>
+                                <p>ឈ្មោះឪពុកម្តាយដែលត្រូវបង្ហាញនៅក្នុងកំណត់ត្រាអត្តសញ្ញាណបណ្ណ</p>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="father_name">
+                                    <i class="fas fa-male"></i> ឈ្មោះឪពុក *
+                                </label>
+                                <input type="text" id="father_name" required placeholder="ឧ. សួន វណ្ណៈ"
+                                    lang="km" inputmode="text" data-khmer-only="true"
+                                    maxlength="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="mother_name">
+                                    <i class="fas fa-female"></i> ឈ្មោះម្តាយ *
+                                </label>
+                                <input type="text" id="mother_name" required placeholder="ឧ. លី សុភាព"
+                                    lang="km" inputmode="text" data-khmer-only="true"
+                                    maxlength="100">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="form-section">
+                        <div class="form-section-header">
+                            <div class="form-section-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div>
+                                <h3>សុពលភាពឯកសារ</h3>
+                                <p>កំណត់ថ្ងៃចេញប័ណ្ណ និងថ្ងៃផុតសុពលភាពសម្រាប់ប្រើក្នុងការគ្រប់គ្រង</p>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="issue_date">
+                                    <i class="fas fa-calendar-check"></i> ថ្ងៃចេញប័ណ្ណ *
+                                </label>
+                                <input type="date" id="issue_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expiry_date">
+                                    <i class="fas fa-calendar-times"></i> ថ្ងៃផុតសុពលភាព *
+                                </label>
+                                <input type="date" id="expiry_date" required readonly>
+                                <small class="form-hint">កំណត់ស្វ័យប្រវត្តិពីថ្ងៃចេញប័ណ្ណ បូក 5 ឆ្នាំ។</small>
+                            </div>
+                        </div>
+                    </section>
 
                     <div class="form-actions">
                         <button type="button" class="btn btn-secondary" onclick="closeModal()">
                             <i class="fas fa-times"></i> បោះបង់
                         </button>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> រក្សាទុក
+                            <i class="fas fa-save"></i> រក្សាទុកព័ត៌មាន
                         </button>
                     </div>
                 </form>
@@ -272,7 +458,9 @@
         <div class="modal-content view-modal-content">
             <div class="modal-header">
                 <h2><i class="fas fa-id-card"></i> ព័ត៌មានលម្អិត</h2>
-                <button class="close-btn" onclick="closeViewModal()">&times;</button>
+                <button type="button" class="close-btn" aria-label="បិទ" onclick="closeViewModal()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             <div class="modal-body" id="view-modal-body">
                 <!-- Detail content will be loaded here -->
@@ -290,4 +478,5 @@
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
+
 </html>
